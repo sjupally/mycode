@@ -1,0 +1,22 @@
+spring:
+  profiles:
+     active: dev
+        
+server:
+  port: 9090
+  
+  
+kafka:
+  bootstrap-servers: 111.93.16.246:9092
+  group:
+    groupId: abhya_app_group
+  topic:
+    deviation: deviation_topic
+    distress: distress_topic
+    video: video_topic
+    routeintiation: route_intiation
+    endtrip: end_trip
+    sharelocation: share_location
+    shareroute: share_route
+    commandexecution: command_execution
+    dataprocessortopic: abhaya-topic

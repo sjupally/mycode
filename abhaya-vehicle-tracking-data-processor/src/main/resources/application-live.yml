@@ -1,0 +1,51 @@
+# Postgres db configuration
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.120.43:5432/abhayadb
+    username: abhaya
+    password: abhaya
+    testOnBorrow: true
+    validationQuery: select 1 
+    validationInterval: 30000
+    maxActive: 100
+    maxIdle: 100
+    minIdle: 10
+    initialSize: 0
+    maxWait: 30000
+    testOnReturn: false
+    testWhileIdle: false
+    timeBetweenEvictionRunsMillis: 5000
+    minEvictableIdleTimeMillis: 60000
+    removeAbandoned: false
+    removeAbandonedTimeout: 60
+    logAbandoned: false
+  jpa:
+    database_platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 192.168.120.41:9300
+      repositories:
+        enabled: true
+      
+tcp:
+  host: 
+    name: 192.168.120.24
+    port: 45567
+    
+kafka:
+  bootstrap-servers: 192.168.120.35:9092
+  group:
+    groupId: abhya_app_group
+  topic:
+    deviation: deviation_topic
+    distress: distress_topic
+    endtrip: end_trip
+    sharelocation: share_location
+    shareroute: share_route
+    routeintiation: route_intiation
+    commandexecution: command_execution

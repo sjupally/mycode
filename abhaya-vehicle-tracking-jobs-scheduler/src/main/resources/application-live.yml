@@ -1,0 +1,27 @@
+# Postgres db configuration
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.120.43:5432/abhayadb
+    username: abhaya
+    password: abhaya
+    testOnBorrow: true
+    validationQuery: select 1 
+    validationInterval: 30000
+    maxActive: 100
+    maxIdle: 100
+    minIdle: 10
+    initialSize: 0
+    maxWait: 30000
+    testOnReturn: false
+    testWhileIdle: false
+    timeBetweenEvictionRunsMillis: 5000
+    minEvictableIdleTimeMillis: 60000
+    removeAbandoned: false
+    removeAbandonedTimeout: 60
+    logAbandoned: false
+  jpa:
+    database_platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    hibernate:
+      ddl-auto: update

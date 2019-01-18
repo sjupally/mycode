@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>abhaya-vehicle-tracking-utility</artifactId>
+		<groupId>com.abhaya</groupId>
+		<version>0.1.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>abhaya-vehicle-tracking-spark-data-processor</artifactId>
+	<name>abhaya-vehicle-tracking-spark-data-processor</name>
+	<packaging>jar</packaging>
+    
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<start-class>com.abhaya.vehicle.tracking.Application</start-class>
+		<java.version>1.8</java.version>
+		<spark.version>2.2.1</spark.version>
+	</properties>
+	
+	<dependencies>
+       <dependency>
+			<groupId>com.abhaya</groupId>
+			<artifactId>abhaya-vehicle-tracking-data-processor</artifactId>
+			<version>0.1.1-SNAPSHOT</version>
+		</dependency>
+        <dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		   <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>${spark.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+		<dependency>
+		    <groupId>org.scala-lang</groupId>
+		    <artifactId>scala-xml</artifactId>
+		    <version>2.11.0-M4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
+			<version>2.1.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+    </dependencies>
+ 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

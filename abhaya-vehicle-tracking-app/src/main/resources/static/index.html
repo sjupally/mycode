@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Suggested Routes</title>
+      <meta name="viewport" content="initial-scale=1.0">
+      <link rel="stylesheet" href="style.css" />
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <meta charset="utf-8">
+   </head>
+   <body>
+      <div style="width:375px; height:667px; overflow:hidden; position: fixed;">
+         <div id="map" onmousedown='return false;' onselectstart='return false;'></div>
+         <div class="floating-panel">
+            <div class="source-grn"></div>
+            <div class="source-red"></div>
+            <input type="text" id="source" value="" placeholder="Enter Source" readonly>
+            <br>
+            <input type="text" id="end1" value="" placeholder="Enter Destination">
+            <button id="startTripButton" class="start-btn" unselectable="on" onmousedown='return false;' onselectstart='return false;'>Start Trip</button>
+            <button id="endbutton" unselectable="on" onmousedown='return false;' onselectstart='return false;'>End Trip</button>
+            <div id="estimate" class="ExtimatedTime" unselectable="on" onmousedown='return false;' onselectstart='return false;'></div>
+         </div>
+         <div class="floating-panel2" unselectable="on" onmousedown='return false;' onselectstart='return false;'>
+            <button id="helpbutton">Help!</button><br>
+            <button id="sharebutton">Share Location</button>
+         </div>
+      </div>
+      <!-- Share Route Alert at Start Trip button-->
+      <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="startButtonShareRoutePopup" data-keyboard="false" data-backdrop="static" onmousedown='return false;' onselectstart='return false;'>
+         <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel">Do you want to share your Route?</h4>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="start-btn-share-route-modal-yes-btn" data-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-primary" id="start-btn-share-route-modal-no-btn" data-dismiss="modal">No</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- End Trip Popup -->
+      <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="endTripButtonPopup" data-keyboard="false" data-backdrop="static" onmousedown='return false;' onselectstart='return false;'>
+         <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel">Do you want to End Your Trip?</h4>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="end-trip-modal-yes-btn" data-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-primary" id="modal-btn-no" data-dismiss="modal">No</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Help Alert -->
+      <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="helpButtonPopup" data-keyboard="false" data-backdrop="static" onmousedown='return false;' onselectstart='return false;'>
+         <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel">Do you want to intimate to the police?</h4>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="help-button-modal-yes-btn" data-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-primary" id="modal-btn-no" data-dismiss="modal">No</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="helpButtonPoliceAlert" data-keyboard="false" data-backdrop="static" onmousedown='return false;' onselectstart='return false;'>
+         <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel">Alert sent to police command and control center, and your Guardian.</h4>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Share Location button popup -->
+      <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="shareLocationButtonPopup" data-keyboard="false" data-backdrop="static" onmousedown='return false;' onselectstart='return false;'>
+         <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel">Your Location shared successfully with your emergency contacts.</h4>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyC79q-pUc8WbTxviL8GCu9agKR4Tl6PDEI&libraries=geometry,places"></script>
+      <script src="trackMe.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script>
+         google.maps.event.addDomListener(window, 'load', TRACK_ME.initMap());
+      </script>
+   </body>
+</html>

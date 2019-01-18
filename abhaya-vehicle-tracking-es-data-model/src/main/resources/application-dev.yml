@@ -1,0 +1,9 @@
+
+# Elastic Search configuration
+spring:
+  data:
+    elasticsearch:
+      cluster-name:  ES_Cluster_01
+      cluster-nodes: 111.93.16.251:9300
+      repositories:
+        enabled: true

@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: local
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
+
+server:
+  port: 8092
+
+
+  
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+      
+kafka:
+  bootstrap-servers: 111.93.16.246:9092
+  topic:
+    deviation: deviation_topic
+    
+    
+sms:
+  apiKey : 9VNpCj4ER+A-kBJuRsqUzpxkLo7LCHvHBhhSODAfhd
+  sender : TXTLCL
+
+route:
+  url: http://111.93.16.251:8099?

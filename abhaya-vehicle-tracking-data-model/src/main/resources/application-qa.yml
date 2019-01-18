@@ -1,0 +1,13 @@
+
+# Postgres db configuration
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://111.93.16.246:5432/abhayadb
+    username: abhaya
+    password: abhaya
+  jpa:
+    database_platform: org.hibernate.dialect.PostgreSQL9Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
