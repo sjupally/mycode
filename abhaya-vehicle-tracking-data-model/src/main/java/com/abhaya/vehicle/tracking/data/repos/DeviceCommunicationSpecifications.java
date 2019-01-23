@@ -46,7 +46,7 @@ public class DeviceCommunicationSpecifications implements Specification<DeviceCo
     }
 
     public static Sort sortByIdAsc() {
-        return new Sort(Sort.Direction.DESC, "id");
+        return new Sort(Sort.Direction.DESC, "packetDate" , "packetTime");
     }
 
     public static Pageable constructPageSpecification(int pageIndex, int pageSize) {
@@ -88,7 +88,7 @@ public class DeviceCommunicationSpecifications implements Specification<DeviceCo
         }
         if (!StringUtils.isEmpty(searchValue))
 		{
-			predicate = criteriaBuilder.or(criteriaBuilder.equal(root.get("serialNumber"),searchValue));
+			predicate = criteriaBuilder.or(criteriaBuilder.equal(root.get("serialNumber"),searchValue), criteriaBuilder.equal(root.get("rcNumber"),searchValue));
 		}
         if (!StringUtils.isEmpty(searchDate)) {
             predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("packetDate"), searchDate));

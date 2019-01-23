@@ -12,6 +12,6 @@ public class ReadPoliceStationDetailsSetEvent extends ReadPageEvent<ReadPoliceSt
 	private Long id;
 	private String sortDirection;
 	private String sortColumnName;
-	private Long mobileNumber;
+	private String mobileNumber;
 	private String stationName;
 }

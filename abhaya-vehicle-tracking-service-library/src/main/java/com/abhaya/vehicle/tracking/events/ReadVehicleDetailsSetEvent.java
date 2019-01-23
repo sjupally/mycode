@@ -12,7 +12,7 @@ public class ReadVehicleDetailsSetEvent extends ReadPageEvent<ReadVehicleDetails
 	private Long id;
 	private String property;
 	private String direction;
-	private Long mobileNumber;
+	private String mobileNumber;
 	private String rcNumber;
 	private String serialNumber;
 	private String searchValue;

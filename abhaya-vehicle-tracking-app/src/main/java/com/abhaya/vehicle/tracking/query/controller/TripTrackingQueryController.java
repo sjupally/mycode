@@ -108,11 +108,13 @@ public class TripTrackingQueryController
 	@ApiOperation(value = "Get Total Number of Trips Count", response = TripSummaryVO.class)
 	@RequestMapping(value="getTripsSummary", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<TripSummaryVO> getTripsSummary(@RequestParam(value = "searchDate" , required = false) String searchDate,
-											   @RequestParam(value = "isDistrictWise", required = false, defaultValue = "false") Boolean isDistrictWise)
+											   @RequestParam(value = "isDistrictWise", required = false, defaultValue = "false") Boolean isDistrictWise,
+											   @RequestParam(value = "districtId" , required = false) Long districtId)
 	{
 		ReadTripDetailsSetEvent request = new ReadTripDetailsSetEvent();
 		request.setSearchValue(searchDate);
 		request.setIsDistrictWise(isDistrictWise);
+		request.setDistrictId(districtId);
 
 		return service.getTripsSummary(request);
 	}
@@ -120,11 +122,14 @@ public class TripTrackingQueryController
 	@ApiOperation(value = "Get Total Number of Trips Count", response = TripSummaryVO.class)
 	@RequestMapping(value="getRouteDeviatedAndPanicSummary", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<TripSummaryVO> getRouteDeviatedAndPanicSummary(@RequestParam(value = "searchDate" , required = false) String searchDate,
-															   @RequestParam(value = "isDistrictWise", required = false, defaultValue = "false") Boolean isDistrictWise)
+															   @RequestParam(value = "isDistrictWise", required = false, defaultValue = "false") Boolean isDistrictWise,
+															   @RequestParam(value = "districtId" , required = false) Long districtId)
 	{
 		ReadTripDetailsSetEvent request = new ReadTripDetailsSetEvent();
 		request.setSearchValue(searchDate);
 		request.setIsDistrictWise(isDistrictWise);
+		request.setDistrictId(districtId);
+
 		return service.getRouteDeviatedAndPanicSummary(request);
 	}
 

@@ -1,5 +1,6 @@
 package com.abhaya.vehicle.tracking.data.repos;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -19,7 +20,7 @@ import com.abhaya.vehicle.tracking.utils.DateUtils;
 public class VehicleDetailsSpecifications implements Specification<VehicleDetails> 
 {
 	private static final long serialVersionUID = 1L;
-	private Long mobileNumber;
+	private String mobileNumber;
 	private String rcNumber;
 	private String serialNumber;
 	private String searchValue;
@@ -28,7 +29,7 @@ public class VehicleDetailsSpecifications implements Specification<VehicleDetail
 	private Long cityId;
 	private String date;
 
-	public VehicleDetailsSpecifications(Long mobileNumber,String rcNumber,String serialNumber,String searchValue,Boolean isDeviceMapped,Long districtId,
+	public VehicleDetailsSpecifications(String mobileNumber,String rcNumber,String serialNumber,String searchValue,Boolean isDeviceMapped,Long districtId,
 			Long cityId,String date) 
 	{
 		super();
@@ -86,12 +87,16 @@ public class VehicleDetailsSpecifications implements Specification<VehicleDetail
 		{
 			predicate = criteriaBuilder.and(predicate,criteriaBuilder.equal(root.get("city").get("id"),cityId));
 		}
-		if (!StringUtils.isEmpty(date))
+		if (!StringUtils.isEmpty(date)) 
 		{
-			try {
-				predicate = criteriaBuilder.and(predicate,criteriaBuilder.between(root.get("deviceMappedDate"),DateUtils.appendStartTime(date),DateUtils.appendEndTime(date)));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+			try 
+			{
+				Timestamp sDate = DateUtils.appendStartTime(date);
+				Timestamp eDate = DateUtils.appendEndTime(date);
+				predicate = criteriaBuilder.and(predicate,criteriaBuilder.between(root.get("deviceMappedDate"),sDate,eDate));
+			} 
+			catch (ParseException e) 
+			{
 				e.printStackTrace();
 			}
 		}

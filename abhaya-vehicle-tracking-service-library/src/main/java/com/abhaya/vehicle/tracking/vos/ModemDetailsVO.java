@@ -28,4 +28,10 @@ public class ModemDetailsVO implements Serializable
 	private String serialNumber;
 	private String createdDate;
 	private String mobileNumber;
+	private Long stateId;
+	private Long districtId;
+	private Long cityId;
+	private String stateName;
+	private String districtName;
+	private String cityName;
 }

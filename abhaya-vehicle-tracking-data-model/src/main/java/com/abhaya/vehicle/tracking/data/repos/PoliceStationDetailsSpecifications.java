@@ -16,9 +16,9 @@ public class PoliceStationDetailsSpecifications implements Specification<PoliceS
 {
 	private static final long serialVersionUID = 1L;
 	private String stationName;
-	private Long mobileNumber;
+	private String mobileNumber;
 
-	public PoliceStationDetailsSpecifications(String stationName, Long mobileNumber) 
+	public PoliceStationDetailsSpecifications(String stationName, String mobileNumber) 
 	{
 		super();
 		this.stationName = stationName;

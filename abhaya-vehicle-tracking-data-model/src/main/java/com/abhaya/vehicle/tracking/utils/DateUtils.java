@@ -31,7 +31,7 @@ public final class DateUtils
     public static final SimpleDateFormat DD_MM_YYYY_SLASH = new SimpleDateFormat("dd/MM/yyyy");
     public static final SimpleDateFormat YYYY_MM_DD = new SimpleDateFormat("yyyy-MM-dd");
     public static final SimpleDateFormat HH_MM_SS_SS = new SimpleDateFormat("hh:mm:ss.SS");
-    public static final SimpleDateFormat HH_MM_SS = new SimpleDateFormat("hh:mm:ss");
+    public static final SimpleDateFormat HH_MM_SS = new SimpleDateFormat("HH:mm:ss");
     public static final SimpleDateFormat MM_DD_YYYY_TIME = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss.SS");
     public static final SimpleDateFormat MM_DD_YYYY = new SimpleDateFormat("MM/dd/yyyy");
     public static final SimpleDateFormat MM_DD_YYYY_TIME_SHORT = new SimpleDateFormat("MM/dd/yyyy hh:mm a");

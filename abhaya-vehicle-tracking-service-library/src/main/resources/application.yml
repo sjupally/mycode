@@ -31,5 +31,7 @@ sms:
   apiKey : 9VNpCj4ER+A-kBJuRsqUzpxkLo7LCHvHBhhSODAfhd
   sender : TXTLCL
 
-route:
-  url: http://111.93.16.251:8099?
+rti:
+  url : https://otsiqa.epragathi.org:9393/
+  authKey : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiT1RTSSIsInBhc3N3b3JkIj
+

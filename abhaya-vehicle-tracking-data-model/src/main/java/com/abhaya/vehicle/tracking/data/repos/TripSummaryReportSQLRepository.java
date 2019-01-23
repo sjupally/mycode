@@ -24,13 +24,15 @@ public class TripSummaryReportSQLRepository {
 
     //Until Hibernate 6 release ,you have to use these deprecated methods only,no other alternative to these deprecated methods in 5.3	
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public List<TripSummaryVO> tripSummaryReport(String searchDate, Boolean isDistrictWise) {
+    public List<TripSummaryVO> tripSummaryReport(String searchDate, Boolean isDistrictWise, Long districtId) {
         StringBuilder builder = new StringBuilder();
         StringBuilder sqlBuilder = new StringBuilder();
         if (!StringUtils.isEmpty(searchDate)) {
             builder.append(" AND date_trunc('day',request_time) = to_date('" + searchDate + "','YYYY-MM-DD')");
         }
-
+        if (!StringUtils.isEmpty(districtId)) {
+            builder.append(" AND district_id = " + districtId);
+        }
         sqlBuilder.append(" select 'tripCount' As type, count(tr.is_trip_closed) As count, tr.is_trip_closed As isClosed");
         if (isDistrictWise) {
             sqlBuilder.append(", di.name As districtName, di.id As districtId ");
@@ -64,15 +66,16 @@ public class TripSummaryReportSQLRepository {
         return query.list();
     }
 
-    public List<TripSummaryVO> routeDeviatedAndPanicSummaryReport(String searchDate, Boolean isDistrictWise) {
+    public List<TripSummaryVO> routeDeviatedAndPanicSummaryReport(String searchDate, Boolean isDistrictWise, Long districtId) {
         List<TripSummaryVO> result = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         StringBuilder routeDeviationSql = new StringBuilder();
         if (!StringUtils.isEmpty(searchDate)) {
             builder.append(" AND date_trunc('day',request_time) = to_date('" + searchDate + "','YYYY-MM-DD')");
         }
-
-
+        if (!StringUtils.isEmpty(districtId)) {
+            builder.append(" AND district_id = " + districtId);
+        }
         routeDeviationSql.append(" select 'routeDeviation' As type, count(r.id) As count, count(tr.id) As tripCount");
         if (isDistrictWise) {
             routeDeviationSql.append(", di.name As districtName, di.id As districtId ");
@@ -110,6 +113,7 @@ public class TripSummaryReportSQLRepository {
         if (isDistrictWise) {
             distressSql.append(", di.name As districtName, di.id As districtId ");
         }
+
         distressSql.append(" from distress_details d ");
         distressSql.append(" RIGHT OUTER JOIN trip_details tr ON tr.id = d.trip_id");
         distressSql.append(" JOIN vehicle_details v ON v.id = tr.vehicle_id");
@@ -121,12 +125,12 @@ public class TripSummaryReportSQLRepository {
         }
 
         session = (Session) manager.getDelegate();
-        query = session.createSQLQuery(routeDeviationSql.toString())
+        query = session.createSQLQuery(distressSql.toString())
                 .addScalar("type", StringType.INSTANCE)
                 .addScalar("count", LongType.INSTANCE)
                 .addScalar("tripCount", LongType.INSTANCE);
         if (isDistrictWise) {
-            query = session.createSQLQuery(routeDeviationSql.toString())
+            query = session.createSQLQuery(distressSql.toString())
                     .addScalar("type", StringType.INSTANCE)
                     .addScalar("count", LongType.INSTANCE)
                     .addScalar("tripCount", LongType.INSTANCE)

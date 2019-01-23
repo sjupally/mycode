@@ -12,4 +12,7 @@ public interface DistressDetailsRepository extends TableRepository<DistressDetai
 	@Query("FROM DistressDetails where tripDetails=:tripDetails")
 	DistressDetails getByTrip(TripDetails tripDetails);
 	
+	@Query("FROM DistressDetails where tripDetails=:tripDetails and eventType=:eventType and isClosed=false")
+	DistressDetails getByTripAndEventType(TripDetails tripDetails, String eventType);
+	
 }

@@ -16,10 +16,10 @@ import com.abhaya.vehicle.tracking.data.model.EmergencyContactNumbers;
 public class EmergencyContactNumbersSpecifications implements Specification<EmergencyContactNumbers> 
 {
 	private static final long serialVersionUID = 1L;
-	private Long emergencyContactNumber;
+	private String emergencyContactNumber;
 	private String citizenMobileNumber;
 
-	public EmergencyContactNumbersSpecifications(Long emergencyContactNumber, String citizenMobileNumber) 
+	public EmergencyContactNumbersSpecifications(String emergencyContactNumber, String citizenMobileNumber) 
 	{
 		super();
 		this.emergencyContactNumber = emergencyContactNumber;

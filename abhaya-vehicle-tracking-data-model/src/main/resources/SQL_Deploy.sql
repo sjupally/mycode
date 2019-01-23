@@ -267,4 +267,31 @@ create or replace view watch_vehicle_view as
  JOIN state s ON s.id = v.state_id
  JOIN districts di ON di.id = v.district_id
  JOIN city ci ON ci.id = v.city_id;
+ 
+ # =========================================================================================
+
+create or replace view modem_details_view as
+ select md.id,
+       md.created_date,
+       md.imei_number,
+	   md.imsi_number,
+	   md.id_address,
+	   v.rc_number,
+	   md.serial_number,
+	   md.signal_strength,
+	   md.sim_number,
+       md.updated_date,
+       md.version,
+	   md.mobile_number,
+	   s.name As state_name,
+	   di.name As district_name,
+	   ci.name As city_name,
+	   s.id As state_id,
+	   di.id As district_id,
+	   ci.id As city_id
+ from modem_details md
+ JOIN vehicle_details v ON v.serial_number = md.serial_number
+ JOIN state s ON s.id = v.state_id
+ JOIN districts di ON di.id = v.district_id
+ JOIN city ci ON ci.id = v.city_id;
   

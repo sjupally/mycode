@@ -78,7 +78,7 @@ public class DriverDetailsSpecifications implements Specification<DriverDetails>
 		}
 		if (!StringUtils.isEmpty(driverContactNumber))
 		{
-			predicate = criteriaBuilder.and(predicate,criteriaBuilder.equal(root.get("contactNumber"), Long.valueOf(driverContactNumber)));
+			predicate = criteriaBuilder.and(predicate,criteriaBuilder.equal(root.get("contactNumber"), driverContactNumber));
 		}
 		/*if (!StringUtils.isEmpty(date))
 		{

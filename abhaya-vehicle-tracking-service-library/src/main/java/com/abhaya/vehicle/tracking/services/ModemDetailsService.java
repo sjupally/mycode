@@ -1,6 +1,5 @@
 package com.abhaya.vehicle.tracking.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +8,15 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import com.abhaya.vehicle.tracking.data.model.ModemDetails;
+import com.abhaya.vehicle.tracking.data.model.ModemDetailsView;
 import com.abhaya.vehicle.tracking.data.repos.ModemDetailsRepository;
 import com.abhaya.vehicle.tracking.data.repos.ModemDetailsSpecifications;
+import com.abhaya.vehicle.tracking.data.repos.ModemDetailsViewRepository;
 import com.abhaya.vehicle.tracking.events.CreateModemDetailsEvent;
 import com.abhaya.vehicle.tracking.events.PageReadEvent;
 import com.abhaya.vehicle.tracking.events.ReadModemDataSetEvent;
 import com.abhaya.vehicle.tracking.util.DateUitls;
-import com.abhaya.vehicle.tracking.util.NepheleValidationUtils;
+import com.abhaya.vehicle.tracking.util.ObjectMapperUtils;
 import com.abhaya.vehicle.tracking.vos.ModemDetailsVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,7 @@ public interface ModemDetailsService
 	public class impl implements ModemDetailsService
 	{
 		@Autowired private ModemDetailsRepository repository;
+		@Autowired private ModemDetailsViewRepository modemDetailsViewRepository;
 
 		@Override
 		public void save(CreateModemDetailsEvent event) 
@@ -70,26 +72,10 @@ public interface ModemDetailsService
 		@Override
 		public PageReadEvent<ModemDetailsVO> readModemDeviceData(ReadModemDataSetEvent request) 
 		{
-			Page<ModemDetails> dbContent = repository.findAll(new ModemDetailsSpecifications(request.getSerialNumber(),request.getImeiNumber(),request.getSearchValue(),request.getSearchDate()),ModemDetailsSpecifications.constructPageSpecification(request.getPageable().getPageNumber(),request.getPageable().getPageSize()));
-			List<ModemDetailsVO> content = new ArrayList<>();
-			for (ModemDetails record : NepheleValidationUtils.nullSafe(dbContent)) 
-			{
-				ModemDetailsVO details = ModemDetailsVO.builder()
-					.imeiNumber(record.getImeiNumber())
-					.id(record.getId())
-					.imsiNumber(record.getImsiNumber())
-					.ipAddress(record.getIpAddress())
-					.serialNumber(record.getSerialNumber())
-					.signalStrength(record.getSignalStrength())
-					.simNumber(record.getSimNumber())
-					.version(record.getVersion())
-					.createdDate(record.getCreatedDate() != null ? DateUitls.getStringFromTimestamp(record.getCreatedDate()) : null)
-					.mobileNumber(record.getMobileNumber())
-					.build();
-					content.add(details);
-				}
+			Page<ModemDetailsView> dbContent = modemDetailsViewRepository.findAll(new ModemDetailsSpecifications(request.getSerialNumber(),request.getImeiNumber(),request.getSearchValue(),request.getSearchDate(), request.getStateId(), request.getDistrictId(), request.getCityId()),ModemDetailsSpecifications.constructPageSpecification(request.getPageable().getPageNumber(),request.getPageable().getPageSize()));
+			List<ModemDetailsVO> content = ObjectMapperUtils.mapAll(dbContent.getContent(), ModemDetailsVO.class);
 			Page<ModemDetailsVO> page = new PageImpl<>(content, request.getPageable(), dbContent != null ? dbContent.getTotalElements() : 0);
-			return new PageReadEvent<>(page);
+            return new PageReadEvent<>(page);
 		}
 	}
 }

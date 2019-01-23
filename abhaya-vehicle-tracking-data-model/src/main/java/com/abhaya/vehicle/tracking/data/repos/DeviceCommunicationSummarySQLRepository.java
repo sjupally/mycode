@@ -1,6 +1,10 @@
 package com.abhaya.vehicle.tracking.data.repos;
 
-import com.abhaya.vehicle.tracking.utils.DeviceCommunicationSummaryVO;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
@@ -9,9 +13,7 @@ import org.hibernate.type.StringType;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.List;
+import com.abhaya.vehicle.tracking.utils.DeviceCommunicationSummaryVO;
 
 @SuppressWarnings("deprecation")
 @Repository
@@ -25,6 +27,15 @@ public class DeviceCommunicationSummarySQLRepository {
         StringBuilder sql = new StringBuilder();
         if (!StringUtils.isEmpty(request.getStateId())) {
             builder.append(" and v.state_id=" + request.getStateId());
+        }
+        if (!StringUtils.isEmpty(request.getDistrictId())) {
+            builder.append(" and v.district_id=" + request.getDistrictId());
+        }
+        if (!StringUtils.isEmpty(request.getCityId())) {
+            builder.append(" and v.city_id=" + request.getCityId());
+        }
+        if (!StringUtils.isEmpty(request.getSearchDate())) {
+            builder.append(" and dc.packet_date=" + '\'' +request.getSearchDate()+ '\'');
         }
 
         sql.append("select count(dc.status) As count, dc.status As statusType ");//,  di.name As districtName, di.id As districtId
@@ -71,6 +82,9 @@ public class DeviceCommunicationSummarySQLRepository {
         }
         if (!StringUtils.isEmpty(request.getCityId())) {
             builder.append(" and v.city_id=" + request.getCityId());
+        }
+        if (!StringUtils.isEmpty(request.getSearchDate())) {
+            builder.append(" and dc.packet_date=" + '\'' +request.getSearchDate()+ '\'');
         }
 
         sql.append(" select count(dc.movement) As count, dc.movement As statusType");

@@ -85,12 +85,12 @@ public interface TripTrackingDetailsService
 
 		@Override
 		public List<TripSummaryVO> getTripsSummary(ReadTripDetailsSetEvent request) {
-			return tripSummaryReportSQLRepository.tripSummaryReport(request.getSearchValue(), request.getIsDistrictWise());
+			return tripSummaryReportSQLRepository.tripSummaryReport(request.getSearchValue(), request.getIsDistrictWise(), request.getDistrictId());
 		}
 
 		@Override
 		public List<TripSummaryVO> getRouteDeviatedAndPanicSummary(ReadTripDetailsSetEvent request) {
-			return tripSummaryReportSQLRepository.routeDeviatedAndPanicSummaryReport(request.getSearchValue(), request.getIsDistrictWise());
+			return tripSummaryReportSQLRepository.routeDeviatedAndPanicSummaryReport(request.getSearchValue(), request.getIsDistrictWise(), request.getDistrictId());
 		}
 
 		@Override

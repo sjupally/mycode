@@ -37,7 +37,7 @@ public class EmergencyContactsQueryController
 	@ApiOperation(value = "View list of Emergency Contact Details based on Citizen Mobile Number", response = ResponseEntity.class)
 	@RequestMapping(value="emergencyContacts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PagedResources<EmergencyContactsResource>> readData(@RequestParam(value = "citizenMobileNumber" , required = true) String citizenMobileNumber,
-			@RequestParam(value = "emergencyContactNumber" , required = false) Long emergencyContactNumber,
+			@RequestParam(value = "emergencyContactNumber" , required = false) String emergencyContactNumber,
 			@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,
 			PagedResourcesAssembler<EmergencyContactNumbersVO> pagedAssembler,HttpServletRequest httpServletRequest) 
 	{

@@ -24,8 +24,6 @@ public class PanicSummaryVO  implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	private Long id;
-	private String direction;
-	private String property;
 	private String eventSource;
 	private Boolean isClosed;	
 	private Long count;
@@ -33,6 +31,4 @@ public class PanicSummaryVO  implements Serializable
 	private Long districtId;
 	private Long stateId;
 	private String packetDate;
-	private String searchDate;
-	
 }

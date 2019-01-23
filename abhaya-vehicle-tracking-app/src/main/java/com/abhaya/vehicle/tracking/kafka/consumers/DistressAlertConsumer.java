@@ -27,7 +27,7 @@ public class DistressAlertConsumer
 		if(isClosed.equalsIgnoreCase("false"))
 			service.save(mobileNumber,eventType);
 		else
-			service.update(mobileNumber);
+			service.update(mobileNumber,eventType);
 		
 		
 		//template.convertAndSend("/topic/messages", "A Distress alert is raised from Passenger with Mobile Number : " + mobileNumber + "- eventType :"+ eventType + " - isClosed :" + isClosed);

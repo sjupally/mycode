@@ -14,28 +14,35 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
-import com.abhaya.vehicle.tracking.data.model.ModemDetails;
+import com.abhaya.vehicle.tracking.data.model.ModemDetailsView;
 import com.abhaya.vehicle.tracking.utils.DateUtils;
 
-public class ModemDetailsSpecifications implements Specification<ModemDetails> 
+public class ModemDetailsSpecifications implements Specification<ModemDetailsView> 
 {
 	private static final long serialVersionUID = 1L;
 	private String serialNumber;
 	private String imeiNumber;
 	private String searchValue;
 	private String searchDate;
+	private Long stateId;
+	private Long districtId;
+	private Long cityId;
 
-	public ModemDetailsSpecifications(String serialNumber, String imeiNumber,String searchValue,String searchDate) 
+	public ModemDetailsSpecifications(String serialNumber, String imeiNumber,String searchValue,String searchDate,
+			Long stateId, Long districtId, Long cityId) 
 	{
 		super();
 		this.serialNumber = serialNumber;
 		this.imeiNumber = imeiNumber;
 		this.searchValue = searchValue;
 		this.searchDate = searchDate;
+		this.stateId = stateId;
+		this.districtId = districtId;
+		this.cityId = cityId;
 	}
 	public static Sort sortByIdAsc() 
 	{
-		return new Sort(Sort.Direction.DESC, "id");
+		return new Sort(Sort.Direction.DESC, "createdDate");
 	}
 	public static Pageable constructPageSpecification(int pageIndex, int pageSize) 
 	{
@@ -43,7 +50,7 @@ public class ModemDetailsSpecifications implements Specification<ModemDetails>
 	}
 
 	@Override
-	public Predicate toPredicate(Root<ModemDetails> root, CriteriaQuery<?> cq, CriteriaBuilder criteriaBuilder) 
+	public Predicate toPredicate(Root<ModemDetailsView> root, CriteriaQuery<?> cq, CriteriaBuilder criteriaBuilder) 
 	{
 		Predicate predicate = criteriaBuilder.conjunction();
 		if (!StringUtils.isEmpty(serialNumber)) 
@@ -53,6 +60,15 @@ public class ModemDetailsSpecifications implements Specification<ModemDetails>
 		if (!StringUtils.isEmpty(imeiNumber)) 
 		{
 			predicate = criteriaBuilder.and(predicate,criteriaBuilder.equal(root.get("imeiNumber"),imeiNumber));
+		}
+		if (!StringUtils.isEmpty(stateId)) {
+			predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("stateId"), stateId));
+		}
+		if (!StringUtils.isEmpty(districtId)) {
+			predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("districtId"), districtId));
+		}
+		if (!StringUtils.isEmpty(cityId)) {
+			predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("cityId"), cityId));
 		}
 		if (!StringUtils.isEmpty(searchValue))
 		{

@@ -16,5 +16,8 @@ public class ReadModemDataSetEvent extends ReadPageEvent<ReadModemDataSetEvent>
 	private String sortDirection;
 	private String sortColumnName;
 	private String searchValue;
+	private Long stateId;
+	private Long districtId;
+	private Long cityId;
 }
 

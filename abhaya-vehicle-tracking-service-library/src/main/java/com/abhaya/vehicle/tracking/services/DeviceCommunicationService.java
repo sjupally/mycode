@@ -128,6 +128,7 @@ public interface DeviceCommunicationService {
                     .cityId(request.getCityId())
                     .districtId(request.getDistrictId())
                     .stateId(request.getStateId())
+                    .searchDate(request.getSearchDate())
                     .build();
             return deviceCommunicationSummarySQLRepository.getDeviceCommunicationSummary(deviceCommunicationSummaryVO, request.getIsDistrictWise());
         }
@@ -138,6 +139,7 @@ public interface DeviceCommunicationService {
                     .cityId(request.getCityId())
                     .districtId(request.getDistrictId())
                     .stateId(request.getStateId())
+                    .searchDate(request.getSearchDate())
                     .build();
             return deviceCommunicationSummarySQLRepository.getDeviceCommunicationMovementSummary(deviceCommunicationSummaryVO, request.getIsDistrictWise());
         }

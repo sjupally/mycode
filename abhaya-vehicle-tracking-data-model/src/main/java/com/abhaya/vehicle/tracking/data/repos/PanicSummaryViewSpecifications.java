@@ -20,16 +20,16 @@ public class PanicSummaryViewSpecifications implements Specification<PanicSummar
 	private Long stateId;
 	private Long districtId;
 	private Long cityId;
-	private String date;
+	private String searchDate;
 	
-	public PanicSummaryViewSpecifications(String eventSource,Long stateId, Long districtId,Long cityId,String date) 
+	public PanicSummaryViewSpecifications(String eventSource,Long stateId, Long districtId,Long cityId,String searchDate) 
 	{
 		super();
 		this.eventSource = eventSource;
 		this.stateId = stateId;
 		this.districtId = districtId;
 		this.cityId = cityId;
-		this.date = date;
+		this.searchDate = searchDate;
 	}
 	public static Sort sortByIdAsc() 
 	{
@@ -60,9 +60,9 @@ public class PanicSummaryViewSpecifications implements Specification<PanicSummar
 		{
 			predicate = criteriaBuilder.and(predicate,criteriaBuilder.equal(root.get("cityId"),cityId));
 		}
-		if (!StringUtils.isEmpty(date))
+		if (!StringUtils.isEmpty(searchDate))
 		{
-			predicate = criteriaBuilder.and(predicate,criteriaBuilder.equal(root.get("date"),date));
+			predicate = criteriaBuilder.and(predicate,criteriaBuilder.equal(root.get("packetDate"),searchDate));
 		}
 		return predicate;
 	}

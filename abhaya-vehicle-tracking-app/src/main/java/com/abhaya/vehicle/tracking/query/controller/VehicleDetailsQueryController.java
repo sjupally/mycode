@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,7 +48,7 @@ public class VehicleDetailsQueryController
 	@ApiOperation(value = "View list of Vehicles", response = ResponseEntity.class)
 	@RequestMapping(value="vehicleDetails", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PagedResources<VehicleDetailsResource>> readVehicleData(
-			@RequestParam(value = "mobileNumber", required = false) Long mobileNumber,
+			@RequestParam(value = "mobileNumber", required = false) String mobileNumber,
 			@RequestParam(value = "rcNumber", required = false) String rcNumber,
 			@RequestParam(value = "property", required = false) String property,
 			@RequestParam(value = "serialNumber", required = false) String serialNumber,

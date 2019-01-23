@@ -50,7 +50,7 @@ public interface PanicSummaryService
 		@Override
 		public List<PanicSummaryVO> readData(ReadPanicSummaryEvent request) 
 		{
-			List<PanicSummaryView> dbContent = panicSummaryViewRepository.findAll(new PanicSummaryViewSpecifications(request.getEventSource(),request.getStateId(),request.getDistrictId(), request.getCityId(),request.getDate()));
+			List<PanicSummaryView> dbContent = panicSummaryViewRepository.findAll(new PanicSummaryViewSpecifications(request.getEventSource(),request.getStateId(),request.getDistrictId(), request.getCityId(),request.getSearchDate()));
 			List<PanicSummaryVO> content = ObjectMapperUtils.mapAll(dbContent, PanicSummaryVO.class);
 			return content;
 		}

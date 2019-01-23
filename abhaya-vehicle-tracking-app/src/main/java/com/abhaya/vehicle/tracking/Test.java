@@ -1,32 +1,59 @@
 package com.abhaya.vehicle.tracking;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
+
 
 public class Test {
-	public static void main(String[] args) throws IOException {
-		uploadSingleFile();
-	}
+	// http://localhost:8080/RESTfulExample/json/product/post
+	public static void main(String[] args) {
 
-	private static void uploadSingleFile() throws IOException {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-		ClassPathResource jsaCoverImgFile = new ClassPathResource("jsa-cover.png");
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-		body.add("file", jsaCoverImgFile);
+		try {
 
-		HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-		String serverUrl = "http://127.0.0.1:8099/v1/driver/addPhoto/4";
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> response = restTemplate.postForEntity(serverUrl, requestEntity, String.class);
-		System.out.println("Response code: " + response.getBody());
+			URL url = new URL("https://otsiuat.epragathi.org:8443/reg/api/getVehicleDetails");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setDoOutput(true);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiT1RTSSIsInBhc3N3b3JkIj");
+
+			String input = "{\"prNo\":\"AP16TD5939\"}";
+
+			OutputStream os = conn.getOutputStream();
+			os.write(input.getBytes());
+			os.flush();
+
+			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ conn.getResponseCode());
+			}
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					(conn.getInputStream())));
+
+			String output;
+			System.out.println("Output from Server .... \n");
+			while ((output = br.readLine()) != null) {
+				System.out.println(output);
+			}
+
+			conn.disconnect();
+
+		} catch (MalformedURLException e) {
+
+			e.printStackTrace();
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+
 	}
 }

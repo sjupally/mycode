@@ -1,8 +1,6 @@
 package com.abhaya.vehicle.tracking.data.model;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -52,6 +50,6 @@ public class PanicSummaryView implements Serializable
 	private Long cityId;
 
 	@Column(name = "packet_date")
-	private String date;
+	private String packetDate;
 
 }

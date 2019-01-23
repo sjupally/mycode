@@ -34,10 +34,16 @@ public class ModemDeviceController
 	@ApiOperation(value = "View list of Modem Details", response = ResponseEntity.class)
 	public ResponseEntity<PagedResources<ModemDeviceResource>> readModemDeviceData(
 			@PageableDefault(value = Integer.MAX_VALUE) Pageable pageable,PagedResourcesAssembler<ModemDetailsVO> pagedAssembler,
+			@RequestParam(value = "stateId", required = false) Long stateId,
+			@RequestParam(value = "districtId", required = false) Long districtId,
+			@RequestParam(value = "cityId", required = false) Long cityId,
 			@RequestParam(value = "searchValue", required = false) String searchValue,
 			@RequestParam(value = "searchDate", required = false) String searchDate)
 	{
 		ReadModemDataSetEvent request = new ReadModemDataSetEvent();
+		request.setStateId(stateId);
+		request.setDistrictId(districtId);
+		request.setCityId(cityId);
 		request.setSearchValue(searchValue);
 		request.setSearchDate(searchDate);
 		request.setPageable(pageable);

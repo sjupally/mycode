@@ -26,7 +26,10 @@ sms:
   
 route:
   url: http://111.93.16.251:8099?
-  
+
+rti:
+  url : https://otsiqa.epragathi.org:9393/
+  authKey : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiT1RTSSIsInBhc3N3b3JkIj
 tcp:
   client: 
     port: 54678

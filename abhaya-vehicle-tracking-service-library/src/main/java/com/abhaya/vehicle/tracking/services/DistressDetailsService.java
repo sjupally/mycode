@@ -46,7 +46,7 @@ public interface DistressDetailsService
 	public boolean save(String citizenMobileNumber, String eventType);
 	public PageReadEvent<DistressDetailsVO> readData(ReadDistressDetailsSetEvent request);
 	public EntityReadEvent<DistressDetailsVO> readDataById(ReadVehicleDataEvent request);
-	public void update(String citizenMobileNumber);
+	public void update(String citizenMobileNumber, String eventType);
 	public void updateDistressStatus(Long distressId);
 
 	@Slf4j
@@ -84,7 +84,7 @@ public interface DistressDetailsService
 							.createdDate(DateUitls.getCurrentSystemTimestamp())
 							.distressLocation(currentLocation)
 							.packetDate(!StringUtils.isEmpty(packetDate) ? packetDate : DateUtils.getCurrentDateAsString("dd/MM/yyyy"))
-							.packetTime(!StringUtils.isEmpty(packetTime) ? packetTime : DateUtils.getTimestamp(new SimpleDateFormat("hh:mm:ss")))
+							.packetTime(!StringUtils.isEmpty(packetTime) ? packetTime : DateUtils.getTimestamp(new SimpleDateFormat("HH:mm:ss")))
 							.isClosed(Boolean.FALSE)
 							.tripDetails(tripDetails)
 							.eventType(eventType)
@@ -166,10 +166,12 @@ public interface DistressDetailsService
 			return new EntityReadEvent<>(vo);
 		}
 		@Override
-		public void update(String citizenMobileNumber) 
+		public void update(String citizenMobileNumber, String eventType) 
 		{
 			TripDetails tripDetails = tripDetailsRepository.getActiveTripByCitizenNumber(citizenMobileNumber);
-			DistressDetails distressDetails = repository.getByTrip(tripDetails);
+			log.info("TripDetails : "+tripDetails);
+			DistressDetails distressDetails = repository.getByTripAndEventType(tripDetails, eventType);
+			log.info("distressDetails : "+distressDetails);
 			distressDetails.setClosed(Boolean.TRUE);
 			
 			repository.save(distressDetails);

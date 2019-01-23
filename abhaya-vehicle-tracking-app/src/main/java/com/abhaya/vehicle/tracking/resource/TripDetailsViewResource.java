@@ -32,7 +32,7 @@ public class TripDetailsViewResource extends ResourceSupport
 	private boolean isTripClosed;
 	private String driverName;
 	private String dlNumber;
-	private Long driverContactNumber;
+	private String driverContactNumber;
 	private String rfId;
 	private String rcNumber;
 	private String citizenMobileNumber;
@@ -41,6 +41,6 @@ public class TripDetailsViewResource extends ResourceSupport
 	private String destiLocation;
 	private String driverAddress;
 	private String ownerName;
-	private Long ownerContactNumber;
+	private String ownerContactNumber;
 	private String vehicleAddress;
 }

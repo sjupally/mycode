@@ -15,5 +15,5 @@ public class ReadEmergencyContactsSetEvent extends ReadPageEvent<ReadEmergencyCo
 	private String direction;
 	private String property;
 	private String citizenMobileNumber;
-	private Long emergencyContactNumber;
+	private String emergencyContactNumber;
 }

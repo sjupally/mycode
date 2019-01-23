@@ -35,7 +35,7 @@ public class PanicSummaryQueryController
 		request.setCityId(cityId);
 		request.setStateId(stateId);
 		request.setDistrictId(districtId);
-		request.setDate(searchDate);
+		request.setSearchDate(searchDate);
 
 		List<PanicSummaryVO> list = panicSummaryService.readData(request);
 		return list;

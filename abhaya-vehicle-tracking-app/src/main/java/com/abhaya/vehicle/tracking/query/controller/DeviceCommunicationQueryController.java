@@ -1,13 +1,7 @@
 package com.abhaya.vehicle.tracking.query.controller;
 
-import com.abhaya.vehicle.tracking.assembler.DeviceCommunicationResourceAssembler;
-import com.abhaya.vehicle.tracking.events.PageReadEvent;
-import com.abhaya.vehicle.tracking.events.ReadDeviceCommunicationEvent;
-import com.abhaya.vehicle.tracking.resource.DeviceCommunicationResource;
-import com.abhaya.vehicle.tracking.services.DeviceCommunicationService;
-import com.abhaya.vehicle.tracking.utils.DeviceCommunicationSummaryVO;
-import com.abhaya.vehicle.tracking.vos.DeviceCommunicationVO;
-import io.swagger.annotations.ApiOperation;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.abhaya.vehicle.tracking.assembler.DeviceCommunicationResourceAssembler;
+import com.abhaya.vehicle.tracking.events.PageReadEvent;
+import com.abhaya.vehicle.tracking.events.ReadDeviceCommunicationEvent;
+import com.abhaya.vehicle.tracking.resource.DeviceCommunicationResource;
+import com.abhaya.vehicle.tracking.services.DeviceCommunicationService;
+import com.abhaya.vehicle.tracking.utils.DeviceCommunicationSummaryVO;
+import com.abhaya.vehicle.tracking.vos.DeviceCommunicationVO;
+
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("v1/deviceCommunication")
@@ -74,9 +76,15 @@ public class DeviceCommunicationQueryController {
     @RequestMapping(value = "statusSummary", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DeviceCommunicationSummaryVO> getDeviceCommunicationSummary(
             @RequestParam(value = "stateId", required = false) Long stateId,
+            @RequestParam(value = "districtId", required = false) Long districtId,
+            @RequestParam(value = "cityId", required = false) Long cityId,
+            @RequestParam(value = "searchDate", required = false) String searchDate,
             @RequestParam(value = "isDistrictWise", required = false, defaultValue = "false") Boolean isDistrictWise) {
         ReadDeviceCommunicationEvent request = new ReadDeviceCommunicationEvent();
         request.setStateId(stateId);
+        request.setDistrictId(districtId);
+        request.setCityId(cityId);
+        request.setSearchDate(searchDate);
         request.setIsDistrictWise(isDistrictWise);
         List<DeviceCommunicationSummaryVO> list = service.getDeviceCommunicationSummary(request);
         return list;
@@ -86,9 +94,15 @@ public class DeviceCommunicationQueryController {
     @RequestMapping(value = "movementSummary", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DeviceCommunicationSummaryVO> getDeviceCommunicationMovementSummary(
             @RequestParam(value = "stateId", required = false) Long stateId,
+            @RequestParam(value = "districtId", required = false) Long districtId,
+            @RequestParam(value = "cityId", required = false) Long cityId,
+            @RequestParam(value = "searchDate", required = false) String searchDate,
             @RequestParam(value = "isDistrictWise", required = false, defaultValue = "false") Boolean isDistrictWise) {
         ReadDeviceCommunicationEvent request = new ReadDeviceCommunicationEvent();
         request.setStateId(stateId);
+        request.setDistrictId(districtId);
+        request.setCityId(cityId);
+        request.setSearchDate(searchDate);
         request.setIsDistrictWise(isDistrictWise);
         List<DeviceCommunicationSummaryVO> list = service.getDeviceCommunicationMovementSummary(request);
         return list;

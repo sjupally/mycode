@@ -30,6 +30,12 @@ public class ModemDeviceResourceAssembler extends ResourceAssemblerSupport<Modem
 			.version(record.getVersion())
 			.createdDate(record.getCreatedDate())
 			.mobileNumber(record.getMobileNumber())
+			.stateId(record.getStateId())
+			.districtId(record.getCityId())
+			.cityId(record.getCityId())
+			.stateName(record.getStateName())
+			.districtName(record.getDistrictName())
+			.cityName(record.getCityName())
 			.build();
 		return resource;
 	}
